@@ -50,6 +50,8 @@ function App() {
   });
 
   const remainingCount = tasks.filter(t => !t.completed).length;
+  const completedCount = tasks.length - remainingCount;
+  const progressPercent = tasks.length > 0 ? Math.round((completedCount / tasks.length) * 100) : 0;
 
   return (
     <div className={`app ${isDarkMode ? 'dark' : ''}`}>
@@ -60,9 +62,9 @@ function App() {
             type="button"
             className="theme-toggle"
             onClick={() => setIsDarkMode((prev) => !prev)}
-            aria-label="Toggle dark mode"
+            aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
           >
-            {isDarkMode ? 'Light mode' : 'Dark mode'}
+            {isDarkMode ? '☀️ Light' : '🌙 Dark'}
           </button>
         </div>
         
@@ -99,12 +101,31 @@ function App() {
           </button>
         </div>
 
+        {tasks.length > 0 && (
+          <div className="progress-bar-wrapper">
+            <div className="progress-label">
+              <span>Progress</span>
+              <span>{progressPercent}%</span>
+            </div>
+            <div className="progress-bar-track">
+              <div className="progress-bar-fill" style={{ width: `${progressPercent}%` }} />
+            </div>
+          </div>
+        )}
+
         <ul className="task-list">
           {filteredTasks.length === 0 ? (
             <li className="empty-message">
+              <span
+                className="empty-icon"
+                role="img"
+                aria-label={filter === 'completed' ? 'Party popper' : filter === 'pending' ? 'Check mark' : 'Notepad'}
+              >
+                {filter === 'completed' ? '🎉' : filter === 'pending' ? '✅' : '📝'}
+              </span>
               {filter === 'all' ? 'No tasks yet. Add one above!' : 
                filter === 'completed' ? 'No completed tasks yet.' : 
-               'No pending tasks.'}
+               'No pending tasks. All done!'}
             </li>
           ) : (
             filteredTasks.map(task => (
