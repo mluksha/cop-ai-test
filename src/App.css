@@ -1,133 +1,272 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ── Keyframe animations ─────────────────────────────── */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes checkPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+@keyframes progressFill {
+  from { width: 0; }
+}
+
+/* ── Theme variables ─────────────────────────────────── */
 .app {
-  --primary: #667eea;
-  --secondary: #764ba2;
+  --primary: #6366f1;
+  --secondary: #8b5cf6;
   --background: #ffffff;
-  --text: #333333;
+  --text: #111827;
+  --danger: #ef4444;
+  --danger-light: #fee2e2;
+  --danger-border: #fca5a5;
 
   min-height: 100vh;
   background: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--background) 72%, var(--primary) 28%) 0%,
-    color-mix(in srgb, var(--background) 72%, var(--secondary) 28%) 100%
+    140deg,
+    color-mix(in srgb, var(--background) 68%, var(--primary) 32%) 0%,
+    color-mix(in srgb, var(--background) 68%, var(--secondary) 32%) 100%
   );
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 40px 20px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  padding: 48px 20px 80px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transition: background 0.5s ease;
 }
 
+/* ── Card container ──────────────────────────────────── */
 .container {
-  background: color-mix(in srgb, var(--background) 92%, var(--text) 8%);
-  border-radius: 16px;
-  box-shadow: 0 20px 60px color-mix(in srgb, var(--text) 30%, transparent);
-  padding: 32px;
+  background: color-mix(in srgb, var(--background) 94%, var(--text) 6%);
+  border: 1px solid color-mix(in srgb, var(--background) 80%, var(--text) 20%);
+  border-radius: 24px;
+  box-shadow:
+    0 4px 6px color-mix(in srgb, var(--text) 4%, transparent),
+    0 24px 64px color-mix(in srgb, var(--text) 14%, transparent);
+  padding: 36px 32px 28px;
   width: 100%;
-  max-width: 500px;
+  max-width: 520px;
+  animation: fadeIn 0.4s ease;
 }
 
+/* ── Header ──────────────────────────────────────────── */
 .header-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 h1 {
-  color: var(--text);
   margin: 0;
-  text-align: left;
-  font-size: 28px;
-  font-weight: 600;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .theme-toggle {
-  padding: 8px 14px;
-  border: none;
+  padding: 8px 16px;
+  border: 1.5px solid color-mix(in srgb, var(--background) 70%, var(--text) 30%);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--background) 82%, var(--primary) 18%);
-  color: color-mix(in srgb, var(--text) 70%, var(--primary) 30%);
+  background: transparent;
+  color: var(--text);
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s, color 0.3s;
+  transition: background 0.25s, border-color 0.25s, transform 0.15s;
+  white-space: nowrap;
 }
 
 .theme-toggle:hover {
-  background: color-mix(in srgb, var(--background) 70%, var(--primary) 30%);
+  background: color-mix(in srgb, var(--background) 80%, var(--primary) 20%);
+  border-color: var(--primary);
+  transform: scale(1.04);
 }
 
+/* ── Input row ───────────────────────────────────────── */
 .input-group {
   display: flex;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .task-input {
   flex: 1;
-  padding: 12px 16px;
-  border: 2px solid color-mix(in srgb, var(--background) 80%, var(--text) 20%);
-  border-radius: 8px;
-  font-size: 16px;
-  transition: border-color 0.3s;
+  padding: 13px 18px;
+  border: 2px solid color-mix(in srgb, var(--background) 78%, var(--text) 22%);
+  border-radius: 12px;
+  font-size: 15px;
+  font-family: inherit;
+  transition: border-color 0.25s, box-shadow 0.25s;
   outline: none;
-  background: color-mix(in srgb, var(--background) 96%, var(--text) 4%);
+  background: color-mix(in srgb, var(--background) 97%, var(--text) 3%);
   color: var(--text);
 }
 
 .task-input::placeholder {
-  color: color-mix(in srgb, var(--text) 45%, var(--background) 55%);
+  color: color-mix(in srgb, var(--text) 38%, var(--background) 62%);
 }
 
 .task-input:focus {
   border-color: var(--primary);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 18%, transparent);
 }
 
 .add-button {
-  padding: 12px 24px;
-  background: var(--primary);
-  color: var(--background);
+  padding: 13px 24px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: #fff;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 500;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--primary) 40%, transparent);
 }
 
 .add-button:hover {
-  background: color-mix(in srgb, var(--primary) 85%, var(--secondary) 15%);
+  opacity: 0.88;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--primary) 50%, transparent);
 }
 
+.add-button:active {
+  transform: translateY(0);
+}
+
+/* ── Filter buttons ──────────────────────────────────── */
+.filter-buttons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  background: color-mix(in srgb, var(--background) 82%, var(--text) 18%);
+  border-radius: 12px;
+  padding: 4px;
+}
+
+.filter-button {
+  flex: 1;
+  padding: 8px 14px;
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 65%, var(--background) 35%);
+  border: none;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.22s, color 0.22s, box-shadow 0.22s;
+}
+
+.filter-button:hover:not(.active) {
+  background: color-mix(in srgb, var(--background) 88%, var(--text) 12%);
+  color: var(--text);
+}
+
+.filter-button.active {
+  background: color-mix(in srgb, var(--background) 94%, var(--text) 6%);
+  color: var(--primary);
+  box-shadow: 0 1px 4px color-mix(in srgb, var(--text) 12%, transparent);
+}
+
+/* ── Progress bar ────────────────────────────────────── */
+.progress-bar-wrapper {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--text) 55%, var(--background) 45%);
+}
+
+.progress-bar-track {
+  height: 6px;
+  background: color-mix(in srgb, var(--background) 78%, var(--text) 22%);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+  transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: progressFill 0.6s ease;
+}
+
+/* ── Task list ───────────────────────────────────────── */
 .task-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .task-item {
   display: flex;
   align-items: center;
-  padding: 12px;
-  border-bottom: 1px solid color-mix(in srgb, var(--background) 85%, var(--text) 15%);
-  transition: background 0.2s;
+  padding: 14px 14px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--background) 97%, var(--text) 3%);
+  border: 1px solid color-mix(in srgb, var(--background) 82%, var(--text) 18%);
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  animation: slideDown 0.28s ease;
 }
 
 .task-item:hover {
-  background: color-mix(in srgb, var(--background) 94%, var(--text) 6%);
+  background: color-mix(in srgb, var(--background) 90%, var(--primary) 10%);
+  border-color: color-mix(in srgb, var(--background) 65%, var(--primary) 35%);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--primary) 12%, transparent);
+  transform: translateY(-1px);
+}
+
+.task-item.completed {
+  opacity: 0.7;
 }
 
 .task-item.completed .task-text {
   text-decoration: line-through;
-  color: color-mix(in srgb, var(--text) 45%, var(--background) 55%);
+  color: color-mix(in srgb, var(--text) 42%, var(--background) 58%);
 }
 
+/* ── Custom checkbox ─────────────────────────────────── */
 .checkbox-container {
   display: flex;
   align-items: center;
   cursor: pointer;
   margin-right: 12px;
+  flex-shrink: 0;
 }
 
 .checkbox-container input {
@@ -135,96 +274,104 @@ h1 {
 }
 
 .checkmark {
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--primary);
-  border-radius: 4px;
+  width: 22px;
+  height: 22px;
+  border: 2px solid color-mix(in srgb, var(--background) 60%, var(--text) 40%);
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
+  transition: background 0.22s, border-color 0.22s;
+}
+
+.checkbox-container:hover .checkmark {
+  border-color: var(--primary);
 }
 
 .checkbox-container input:checked + .checkmark {
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  border-color: transparent;
+  animation: checkPop 0.3s ease;
 }
 
 .checkbox-container input:checked + .checkmark::after {
   content: '✓';
-  color: var(--background);
-  font-size: 14px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
 }
 
+/* ── Task text ───────────────────────────────────────── */
 .task-text {
   flex: 1;
   color: var(--text);
-  font-size: 16px;
+  font-size: 15px;
+  line-height: 1.45;
+  transition: color 0.22s;
 }
 
+/* ── Delete button ───────────────────────────────────── */
 .delete-button {
-  background: color-mix(in srgb, var(--secondary) 72%, var(--primary) 28%);
-  color: var(--background);
-  border: none;
-  border-radius: 6px;
-  width: 28px;
-  height: 28px;
-  font-size: 20px;
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 35%, var(--background) 65%);
+  border: 1.5px solid color-mix(in srgb, var(--background) 70%, var(--text) 30%);
+  border-radius: 8px;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.3s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;
+  flex-shrink: 0;
   line-height: 1;
 }
 
 .delete-button:hover {
-  background: color-mix(in srgb, var(--secondary) 84%, var(--primary) 16%);
+  background: var(--danger-light);
+  color: var(--danger);
+  border-color: var(--danger-border);
+  transform: scale(1.1);
 }
 
+/* ── Empty state ─────────────────────────────────────── */
 .empty-message {
   text-align: center;
-  color: color-mix(in srgb, var(--text) 45%, var(--background) 55%);
-  padding: 24px;
-  font-style: italic;
+  color: color-mix(in srgb, var(--text) 40%, var(--background) 60%);
+  padding: 36px 20px;
+  font-size: 15px;
+  animation: fadeIn 0.3s ease;
 }
 
-.filter-buttons {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 20px;
-  justify-content: center;
+.empty-icon {
+  font-size: 36px;
+  display: block;
+  margin-bottom: 10px;
 }
 
-.filter-button {
-  padding: 8px 16px;
-  background: color-mix(in srgb, var(--background) 85%, var(--text) 15%);
-  color: color-mix(in srgb, var(--text) 80%, var(--background) 20%);
-  border: none;
-  border-radius: 20px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.filter-button:hover {
-  background: color-mix(in srgb, var(--background) 75%, var(--text) 25%);
-}
-
-.filter-button.active {
-  background: var(--primary);
-  color: var(--background);
-}
-
+/* ── Footer count ────────────────────────────────────── */
 .task-count {
-  margin-top: 20px;
+  margin-top: 18px;
   text-align: center;
-  color: color-mix(in srgb, var(--text) 60%, var(--background) 40%);
-  font-size: 14px;
+  color: color-mix(in srgb, var(--text) 55%, var(--background) 45%);
+  font-size: 13px;
+  font-weight: 500;
 }
 
+/* ── Dark theme overrides ────────────────────────────── */
 .app.dark {
-  --primary: #7287ff;
-  --secondary: #8b64b9;
-  --background: #1f2435;
-  --text: #f5f7ff;
+  --primary: #818cf8;
+  --secondary: #a78bfa;
+  --background: #0f172a;
+  --text: #f1f5f9;
+  --danger: #f87171;
+  --danger-light: color-mix(in srgb, #ef4444 20%, transparent);
+  --danger-border: color-mix(in srgb, #ef4444 40%, transparent);
+}
+
+.app.dark .delete-button:hover {
+  background: var(--danger-light);
+  color: var(--danger);
+  border-color: var(--danger-border);
 }
