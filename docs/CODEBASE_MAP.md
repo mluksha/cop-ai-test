@@ -1,7 +1,7 @@
 # Codebase Map
 
 ## Overview
-This repository is currently frontend-active (React + TypeScript + Vite), with a scaffolded backend layout under `server/`.
+This repository is currently frontend-active (React + TypeScript + Vite).
 
 ## Frontend (active)
 - `index.html`: root HTML shell, mounts `#root`.
@@ -19,10 +19,5 @@ This repository is currently frontend-active (React + TypeScript + Vite), with a
 ## Extra / non-core
 - `html-test/index.html`: standalone HTML test page.
 
-## Backend status
-- `server/src/`: folder structure exists (`config`, `middleware`, `routes`, `types`) but no source files in this snapshot.
-- `server/dist/`: compiled backend artifacts exist.
-- `server/node_modules/`: installed backend dependencies.
-
 ## Current picture
-Small project with one implemented UI app and backend scaffolding/artifacts present, but no active backend source code currently visible under `server/src`.
+Small project with one implemented UI app.
