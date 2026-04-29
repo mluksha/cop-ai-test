@@ -1,0 +1,4 @@
+- Ignore node_modules, dist, build, .git
+- Keep the summary concise
+- Prefer high-level overview over completeness
+- If the project is small, keep the map short
