@@ -25,3 +25,7 @@
 - Use meaningful variable and function names that clearly describe their purpose
 - Include helpful comments for complex logic
 - Add error handling for user inputs and API calls
+
+## Architecture Reference
+For detailed architecture, repository structure, and key entry points,
+see docs/CODEBASE_MAP.md. This file is the single source of truth for the codebase architecture. Always rely on it when making structural or architectural decisions.
