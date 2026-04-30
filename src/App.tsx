@@ -12,12 +12,27 @@ type FilterType = 'all' | 'completed' | 'pending';
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTask, setNewTask] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [filter, setFilter] = useState<FilterType>('all');
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const addTask = () => {
     const trimmedTask = newTask.trim();
-    if (trimmedTask === '') return;
+
+    if (trimmedTask === '') {
+      setErrorMessage('Todo text cannot be empty');
+      return;
+    }
+
+    const hasDuplicate = tasks.some(
+      (task) => task.text.trim().toLowerCase() === trimmedTask.toLowerCase()
+    );
+
+    if (hasDuplicate) {
+      setErrorMessage('This todo already exists');
+      return;
+    }
+
     const task: Task = {
       id: Date.now(),
       text: trimmedTask,
@@ -25,6 +40,7 @@ function App() {
     };
     setTasks([...tasks, task]);
     setNewTask('');
+    setErrorMessage('');
   };
 
   const deleteTask = (id: number) => {
@@ -79,6 +95,7 @@ function App() {
           />
           <button onClick={addTask} className="add-button">Add</button>
         </div>
+        {errorMessage && <p className="validation-error">{errorMessage}</p>}
 
         <div className="filter-buttons">
           <button 

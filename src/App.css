@@ -157,6 +157,13 @@ h1 {
   transform: translateY(0);
 }
 
+.validation-error {
+  margin: -10px 0 16px;
+  color: var(--danger);
+  font-size: 13px;
+  font-weight: 500;
+}
+
 /* ── Filter buttons ──────────────────────────────────── */
 .filter-buttons {
   display: flex;
