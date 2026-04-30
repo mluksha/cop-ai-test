@@ -1,5 +1,5 @@
-import { Component } from 'react'
-import type { ReactNode } from 'react'
+import { Component } from 'react';
+import type { ReactNode } from 'react';
 
 interface Props {
   children: ReactNode;
@@ -33,8 +33,9 @@ class ErrorBoundary extends Component<Props, State> {
         </div>
       );
     }
+
     return this.props.children;
   }
 }
 
-export default ErrorBoundary
+export default ErrorBoundary;
